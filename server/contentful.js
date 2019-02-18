@@ -110,7 +110,6 @@ module.exports.getEntry = async id => {
   const space = await contentfulManagement.getSpace(config.contenfulSpaceId);
   const env = await space.getEnvironment(config.envId);
   const entry = await env.getEntry(id);
-  console.log(entry);
   return { id: entry.sys.id, ...parseFields(entry.fields) };
 };
 
@@ -131,4 +130,14 @@ module.exports.createEntry = async (args, contentType) => {
     id: entry.sys.id,
     ...fields
   };
+};
+
+module.exports.updateEntry = async (id, value) => {
+  const space = await contentfulManagement.getSpace(config.contenfulSpaceId);
+  const env = await space.getEnvironment(config.envId);
+  const entry = await env.getEntry(id);
+
+  entry.fields.inventory["en-US"] += value;
+  await entry.update();
+  return { id: entry.sys.id, ...parseFields(entry.fields) };
 };

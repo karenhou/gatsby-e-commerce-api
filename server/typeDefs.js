@@ -18,4 +18,8 @@ module.exports = gql`
     getProducts: [Product]
     getProduct(id: String!): Product
   }
+
+  type Mutation {
+    updateProductInventory(id: String!, value: Int!): Product
+  }
 `;

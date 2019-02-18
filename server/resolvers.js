@@ -13,5 +13,11 @@ module.exports = {
       const product = await contentful.getEntry(id);
       return product;
     }
+  },
+  Mutation: {
+    updateProductInventory: async (_, { id, value }, { req, res }) => {
+      const product = await contentful.updateEntry(id, value);
+      return product;
+    }
   }
 };
