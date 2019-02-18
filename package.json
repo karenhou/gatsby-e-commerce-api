@@ -1,0 +1,33 @@
+{
+  "name": "api_ecommerce",
+  "version": "1.0.0",
+  "description": "apollo server for e-commerce",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "author": "Karen Hou",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server": "^2.4.2",
+    "async": "^2.6.2",
+    "contentful-cli": "^0.18.0",
+    "contentful-management": "^5.4.0",
+    "dotenv": "^6.2.0",
+    "graphql": "^14.1.1",
+    "graphql-tag": "^2.10.1",
+    "stripe": "^6.25.1",
+    "underscore": "^1.9.1"
+  },
+  "devDependencies": {
+    "babel-runtime": "^6.26.0",
+    "eslint": "^5.14.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "nodemon": "^1.18.10",
+    "prettier": "^1.16.4"
+  }
+}
