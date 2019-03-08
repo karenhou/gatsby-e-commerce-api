@@ -19,8 +19,8 @@ module.exports = {
       const product = await contentful.updateEntry(id, value);
       return product;
     },
-    publishProductInventory: async (_, { id, value }, { req, res }) => {
-      const publishProduct = await contentful.publishEntry(id, value);
+    publishProductInventory: async (_, { id }, { req, res }) => {
+      const publishProduct = await contentful.publishEntry(id);
       console.log(publishProduct);
       return publishProduct;
     }

@@ -63,12 +63,13 @@ const parseFields = fields => {
   return data;
 };
 
-const parseResponse = (data, parseFieldsFunc = true) =>
+const parseResponse = (data, parseFieldsFunc = true) => {
   // console.log(JSON.stringify(data));
-  data.map(item => {
+  return data.map(item => {
     const fields = parseFieldsFunc ? parseFields(item.fields) : item.fields;
+
     return {
-      entryId: item.sys.id,
+      id: item.sys.id,
       spaceId: item.sys.space.sys.id,
       contentType: item.sys.contentType.sys.id,
       createdAt: item.sys.createdAt,
@@ -76,7 +77,7 @@ const parseResponse = (data, parseFieldsFunc = true) =>
       ...fields
     };
   });
-
+};
 const parseNewEntry = input => {
   const data = {};
   Object.keys(input).map(key => {
@@ -91,7 +92,7 @@ const parseNewEntry = input => {
  * Get array of entries of requested content type
  * @param {*} contentType
  */
-module.exports.getEntries = async (contentType, envId) => {
+module.exports.getEntries = async (contentType, other) => {
   const space = await contentfulManagement.getSpace(config.contenfulSpaceId);
   const env = await space.getEnvironment(config.envId);
   const entries = await env.getEntries({
@@ -142,12 +143,12 @@ module.exports.updateEntry = async (id, value) => {
   return { id: entry.sys.id, ...parseFields(entry.fields) };
 };
 
-module.exports.publishEntry = async (id, value) => {
+module.exports.publishEntry = async id => {
   const space = await contentfulManagement.getSpace(config.contenfulSpaceId);
   const env = await space.getEnvironment(config.envId);
   const entry = await env.getEntry(id);
 
-  entry.fields.inventory["en-US"] += value;
+  // entry.fields.inventory["en-US"] += value;
   await entry.publish();
   return { id: entry.sys.id, ...parseFields(entry.fields) };
 };
