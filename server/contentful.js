@@ -141,3 +141,13 @@ module.exports.updateEntry = async (id, value) => {
   await entry.update();
   return { id: entry.sys.id, ...parseFields(entry.fields) };
 };
+
+module.exports.publishEntry = async (id, value) => {
+  const space = await contentfulManagement.getSpace(config.contenfulSpaceId);
+  const env = await space.getEnvironment(config.envId);
+  const entry = await env.getEntry(id);
+
+  entry.fields.inventory["en-US"] += value;
+  await entry.publish();
+  return { id: entry.sys.id, ...parseFields(entry.fields) };
+};

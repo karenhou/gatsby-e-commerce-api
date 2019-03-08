@@ -21,5 +21,6 @@ module.exports = gql`
 
   type Mutation {
     updateProductInventory(id: String!, value: Int!): Product
+    publishProductInventory(id: String!, value: Int!): Product
   }
 `;
