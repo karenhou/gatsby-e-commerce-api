@@ -39,12 +39,17 @@ module.exports = gql`
   type NewType {
     createdAt: String
   }
+  type MailType {
+    status: String
+    message: String
+  }
 
   type Mutation {
     testHello(id: String!): Test
     createType(id: String!): NewType
     updateProductInventory(id: String!, value: Int!): Product
     publishProductInventory(id: String!): Product
+    sendOrderEmail(name: String!, email: String!, orderId: String!): MailType
     createOrder(
       tokenId: String!
       orderId: String!

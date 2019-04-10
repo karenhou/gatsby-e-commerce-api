@@ -2,6 +2,15 @@
 const contentful = require("./contentful");
 const async = require("async");
 const stripe = require("stripe")(process.env.CONTENTFUL_PRIVATE_KEY);
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_ADDRESS,
+    pass: process.env.EMAIL_PASSWORD
+  }
+});
 
 module.exports = {
   Query: {
@@ -51,6 +60,18 @@ module.exports = {
         );
       });
 
+      const mailOptions = {
+        from: process.env.EMAIL_ADDRESS,
+        to: `${args.customerEmail}`,
+        subject: "Order Form",
+        html: `<h3>Hello ${args.customerName}</h3>
+        <p>Thanks for purchasing our product</p>
+        <p>Your order number is ${args.orderId}</p>
+        <p>You'll receive an email once payment confirmed and product is shipped</p>
+        <p>Thanks again, Happy Shopping!</p>
+        `
+      };
+
       // process payment with stripe
       try {
         const charge = await stripe.charges.create({
@@ -84,12 +105,42 @@ module.exports = {
       delete args.productIds;
       try {
         const order = await contentful.createEntry(args);
-        console.log("success");
+        console.log("order ", order);
+        try {
+          await transporter.sendMail(mailOptions);
+          console.log("email success");
+        } catch (err) {
+          console.log("email fail");
+        }
         return order;
       } catch (error) {
         console.error("make order entry fail", error);
       }
       return order;
+    },
+    sendOrderEmail: async (parent, args) => {
+      const { name, email, orderId } = args;
+      const mailOptions = {
+        from: process.env.EMAIL_ADDRESS,
+        to: `${email}`,
+        subject: "Order Form",
+        html: `<h3>Hello ${name}</h3>
+        <p>Thanks for purchasing our product</p>
+        <p>Your order number is ${orderId}</p>
+        <p>You'll receive another email once payment confirmed and product is shipped</p>
+        <p>Thanks again, Happy Shopping!</p>
+        `
+      };
+
+      try {
+        await transporter.sendMail(mailOptions);
+        return {
+          status: "success",
+          message: "Contact informaton sent successfully"
+        };
+      } catch (err) {
+        return { status: "error", message: err.message };
+      }
     }
   }
 };
