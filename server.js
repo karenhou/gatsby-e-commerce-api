@@ -26,6 +26,6 @@ server.applyMiddleware({ app });
 app.use(cors());
 app.use(errorHandler);
 
-app.listen({ port: PORT }, () =>
-  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
-);
+app.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`);
+});
