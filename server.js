@@ -1,5 +1,5 @@
-// const { ApolloServer, gql } = require("apollo-server-express");
-const { ApolloServer, gql } = require("apollo-server");
+const { ApolloServer, gql } = require("apollo-server-express");
+// const { ApolloServer, gql } = require("apollo-server");
 
 const typeDefs = require("./server/typeDefs");
 const resolvers = require("./server/resolvers");
@@ -23,15 +23,19 @@ const errorHandler = (err, req, res, next) => {
   res.status(status).json(err);
 };
 
-// server.applyMiddleware({ app });
+server.applyMiddleware({ app });
 
-// app.use(cors());
-// app.use(errorHandler);
+app.use(cors());
+app.use(errorHandler);
 
 // app.listen({ port: process.env.PORT || 4000 }, url =>
 //   console.log(`🚀 Server ready at ${url}`)
 // );
+const port = process.env.PORT || 4000;
 
-server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`);
+// server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
+//   console.log(`🚀 Server ready at ${url}`);
+// });
+app.listen(port, function() {
+  console.log(`Listening on Port ${port}`);
 });
