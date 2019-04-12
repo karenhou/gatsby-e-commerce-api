@@ -10,6 +10,7 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  introspection: true,
   // add request and response to graphQL context
   context: ({ req, res }) => ({ req, res })
 });
