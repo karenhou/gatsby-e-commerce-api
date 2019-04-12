@@ -5,7 +5,6 @@ const typeDefs = require("./server/typeDefs");
 const resolvers = require("./server/resolvers");
 const express = require("express");
 const cors = require("cors");
-const PORT = 4000;
 const app = express();
 
 const server = new ApolloServer({
@@ -31,11 +30,11 @@ app.use(errorHandler);
 // app.listen({ port: process.env.PORT || 4000 }, url =>
 //   console.log(`🚀 Server ready at ${url}`)
 // );
-const port = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 
 // server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
 //   console.log(`🚀 Server ready at ${url}`);
 // });
-app.listen(port, function() {
+app.listen(PORT, function() {
   console.log(`Listening on Port ${port}`);
 });
