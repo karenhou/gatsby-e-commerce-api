@@ -11,6 +11,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   introspection: true,
+  playground: true,
   // add request and response to graphQL context
   context: ({ req, res }) => ({ req, res })
 });
