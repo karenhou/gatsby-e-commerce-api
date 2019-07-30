@@ -11,6 +11,10 @@ module.exports = gql`
     price: Float
     inventory: Int
   }
+  input cartProduct {
+    id: String
+    quantity: Int
+  }
   type Test {
     name: String
   }
@@ -54,6 +58,7 @@ module.exports = gql`
       tokenId: String!
       orderId: String!
       productIds: [String]!
+      input: [cartProduct]!
       customerCountry: String!
       customerName: String!
       customerAddress1: String!

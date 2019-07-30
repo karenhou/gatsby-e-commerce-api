@@ -45,17 +45,24 @@ module.exports = {
     },
     createOrder: async (parent, args) => {
       // get products
+      // console.log("args ", args);
       const totalCost = await new Promise(resolve => {
         let total = 0;
         async.each(
           args.productIds,
-          async (productId, callback) => {
+          async function(productId, callback) {
             const product = await contentful.getEntry(productId);
-            total += product.price;
-            callback();
+            let temp = args.input.filter(x => x.id == productId);
+            total += product.price * temp[0].quantity;
+            callback;
           },
-          () => {
-            resolve(total);
+          function(err) {
+            if (err) {
+              console.log("err ", err);
+            } else {
+              console.log("totla", total);
+              resolve(total);
+            }
           }
         );
       });
@@ -71,7 +78,6 @@ module.exports = {
         <p>Thanks again, Happy Shopping!</p>
         `
       };
-
       // process payment with stripe
       try {
         const charge = await stripe.charges.create({
@@ -102,6 +108,7 @@ module.exports = {
       }
 
       delete args.tokenId;
+      delete args.input;
       delete args.productIds;
       try {
         const order = await contentful.createEntry(args);
