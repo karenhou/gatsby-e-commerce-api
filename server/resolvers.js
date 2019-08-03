@@ -45,7 +45,6 @@ module.exports = {
     },
     createOrder: async (parent, args) => {
       // get products
-      // console.log("args ", args);
       const totalCost = await new Promise(resolve => {
         let total = 0;
         async.each(
