@@ -11,25 +11,25 @@
   "author": "Karen Hou",
   "license": "MIT",
   "dependencies": {
-    "apollo-server": "^2.4.2",
-    "async": "^2.6.2",
+    "apollo-server": "^2.8.1",
+    "async": "^2.6.3",
     "contentful-cli": "^0.18.0",
-    "contentful-management": "^5.4.0",
+    "contentful-management": "^5.9.0",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
-    "graphql": "^14.1.1",
+    "graphql": "^14.4.2",
     "graphql-tag": "^2.10.1",
-    "nodemailer": "^6.1.0",
-    "stripe": "^6.25.1",
+    "nodemailer": "^6.3.0",
+    "stripe": "^6.36.0",
     "underscore": "^1.9.1"
   },
   "devDependencies": {
     "babel-runtime": "^6.26.0",
-    "eslint": "^5.14.0",
-    "eslint-config-prettier": "^4.0.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "nodemon": "^1.18.10",
-    "prettier": "^1.16.4"
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.0",
+    "nodemon": "^1.19.1",
+    "prettier": "^1.18.2"
   }
 }
