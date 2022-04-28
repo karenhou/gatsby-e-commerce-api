@@ -12,7 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "apollo-server": "^2.8.1",
-    "async": "^2.6.3",
+    "async": "^2.6.4",
     "contentful-cli": "^0.18.0",
     "contentful-management": "^5.9.0",
     "cors": "^2.8.5",
