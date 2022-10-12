@@ -11,7 +11,7 @@
   "author": "Karen Hou",
   "license": "MIT",
   "dependencies": {
-    "apollo-server": "^2.8.1",
+    "apollo-server": "^2.25.4",
     "async": "^2.6.3",
     "contentful-cli": "^0.18.0",
     "contentful-management": "^5.9.0",
